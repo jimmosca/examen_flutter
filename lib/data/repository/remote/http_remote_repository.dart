@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
@@ -12,16 +11,17 @@ class HttpRemoteRepository implements RemoteRepository {
   HttpRemoteRepository(this._client);
 
   @override
-  Future<HashMap> getComponentsList() async {
-    var response = await _client.get('https://randomuser.me/api/?results=5');
+  Future<Map<String, List<String>>> getComponentsList() async {
+    var response = await _client.get('https://api.adorable.io/avatars/list');
     if (response.statusCode == 200) {
-      HashMap<String, List> components = new HashMap();
+      Map<String, List<String>> components = {};
       var jsonBody = json.decode(response.body);
+      print(jsonBody);
       var jsonFace = jsonBody['face'];
 
       components['eyes'] = jsonFace['eyes'].cast<String>();
-      components['eyes'] = jsonFace['eyes'].cast<String>();
-      components['eyes'] = jsonFace['eyes'].cast<String>();
+      components['nose'] = jsonFace['nose'].cast<String>();
+      components['mouth'] = jsonFace['mouth'].cast<String>();
 
       return components;
     } else if (response.statusCode == 404) {
