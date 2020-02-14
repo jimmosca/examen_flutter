@@ -149,8 +149,9 @@ class _FormScreenState extends State<FormScreen> implements FormView {
             imgUrl == null
                 ? Text("")
                 : CircleAvatar(
-                    minRadius: 18,
-                    child: Image.network(imgUrl),
+                    maxRadius: 60,
+                    minRadius: 40,
+                    backgroundImage: NetworkImage(imgUrl),
                   )
           ],
         ));
@@ -164,7 +165,13 @@ class _FormScreenState extends State<FormScreen> implements FormView {
         }
         return null;
       },
-      onChanged: (text) {},
+      onChanged: (text) {
+        if(labelName == "Name"){
+          name = text;
+        }else{
+          userName = text;
+        }
+      },
       decoration: InputDecoration(labelText: labelName),
     );
   }

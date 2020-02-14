@@ -44,6 +44,7 @@ class FormPresenter{
 
   onSaveClicked(String userName, String name, String eyesSelection, String noseSelection, String mouthSelection) async {
     LoggedUser loggedUser = await _localRepository.saveLoggedUser(new LoggedUser(userName, name, eyesSelection, noseSelection, mouthSelection));
+    print(loggedUser.toMap().toString());
     if(loggedUser != null){
       _view.navigateToProfile();
     }else{
